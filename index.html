@@ -1,596 +1,610 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PCS Scout - Design Mockup</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Nunito',sans-serif;background:#FAF6EF;color:#0D2D5E;line-height:1.65;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCS Scout - Design Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Nunito',sans-serif;background:#FAF6EF;color:#0D2D5E;line-height:1.65;}
 
-/* DESIGN TOKENS */
-:root{
-  --navy:#0D2D5E;
-  --soft-navy:#1A4A8A;
-  --gold:#E8B84B;
-  --pale-gold:#F5D98B;
-  --white:#FFFFFF;
-  --warm-sand:#FAF6EF;
-  --slate:#4A5D7A;
-  --light-steel:#E8EDF5;
-  --success:#2E7D52;
-  --success-light:#E6F4ED;
-  --info-blue:#1D4ED8;
-  --info-light:#EFF6FF;
-}
-
-/* NAV */
-nav{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(13,45,94,0.18);}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.logo-badge{background:var(--gold);color:var(--navy);font-weight:800;font-size:1rem;padding:8px 12px;border-radius:8px;letter-spacing:0.5px;}
-.brand-name{color:var(--white);font-size:1.3rem;font-weight:800;letter-spacing:0.3px;}
-.nav-links{display:flex;gap:24px;}
-.nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.9rem;font-weight:600;transition:color 0.2s;}
-.nav-links a:hover{color:var(--gold);}
-
-/* HERO */
-.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--soft-navy) 100%);padding:72px 24px 80px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:rgba(232,184,75,0.08);border-radius:50%;}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:320px;height:320px;background:rgba(255,255,255,0.04);border-radius:50%;}
-.hero-content{position:relative;z-index:2;max-width:700px;margin:0 auto;}
-.hero-badge{display:inline-block;background:rgba(232,184,75,0.18);border:1px solid rgba(232,184,75,0.35);color:var(--pale-gold);font-size:0.72rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:6px 16px;border-radius:24px;margin-bottom:20px;}
-.hero h1{font-size:3rem;font-weight:800;color:var(--white);margin-bottom:14px;line-height:1.15;}
-.hero h1 .accent{color:var(--gold);}
-.hero-tagline{color:rgba(255,255,255,0.80);font-size:1.1rem;margin-bottom:36px;font-weight:500;line-height:1.6;}
-.search-bar{display:flex;max-width:560px;margin:0 auto;background:var(--white);border-radius:50px;padding:6px 6px 6px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.20);align-items:center;}
-.search-bar input{flex:1;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:1rem;color:var(--navy);background:transparent;font-weight:400;}
-.search-bar input::placeholder{color:var(--slate);}
-.search-bar button{background:var(--gold);color:var(--navy);border:none;border-radius:50px;padding:13px 32px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-.search-bar button:hover{background:var(--pale-gold);}
-
-/* FILTER BAR */
-.filter-bar{background:var(--white);border-bottom:1px solid var(--light-steel);padding:16px 24px;}
-.filter-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
-.filter-label{font-size:0.8rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:1.2px;}
-.filter-group{display:flex;gap:10px;flex-wrap:wrap;}
-.filter-btn{background:var(--warm-sand);border:1.5px solid var(--light-steel);color:var(--navy);font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:600;padding:8px 18px;border-radius:50px;cursor:pointer;transition:all 0.2s;}
-.filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
-.filter-btn:hover:not(.active){background:var(--light-steel);}
-
-/* SECTIONS */
-.section{padding:56px 24px;max-width:1100px;margin:0 auto;}
-.section-header{margin-bottom:36px;}
-.gold-bar{width:48px;height:4px;background:var(--gold);border-radius:4px;margin-bottom:10px;}
-.section-title{font-size:1.75rem;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.15;}
-.section-subtitle{font-size:0.95rem;color:var(--slate);font-weight:500;}
-
-/* LOCATION CARDS */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
-.card{background:var(--white);border-radius:16px;box-shadow:0 2px 16px rgba(13,45,94,0.08);border:1px solid var(--light-steel);overflow:hidden;transition:all 0.3s;}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(13,45,94,0.16);}
-.card-header{background:linear-gradient(135deg,var(--navy),var(--soft-navy));padding:20px 22px 18px;}
-.card-location{font-size:1.25rem;font-weight:700;color:var(--white);margin-bottom:4px;}
-.card-state{font-size:0.82rem;color:rgba(255,255,255,0.68);font-weight:600;}
-.card-body{padding:20px 22px 22px;}
-.school-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--slate);margin-bottom:6px;}
-.school-name{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px;}
-.stars-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
-.stars{color:var(--gold);font-size:1.05rem;letter-spacing:2px;}
-.star-num{font-size:0.85rem;font-weight:700;color:var(--slate);}
-.review-snippet{font-size:0.9rem;color:var(--slate);line-height:1.6;font-style:italic;border-left:3px solid var(--gold);padding-left:12px;margin-bottom:12px;}
-.card-tag{display:inline-block;background:var(--pale-gold);color:#7A5C10;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:20px;}
-
-/* REVIEW CARDS */
-.reviews-feed{display:flex;flex-direction:column;gap:18px;}
-.review-card{background:var(--white);border-radius:14px;padding:22px 24px;box-shadow:0 2px 10px rgba(13,45,94,0.07);border:1px solid var(--light-steel);transition:box-shadow 0.2s;}
-.review-card:hover{box-shadow:0 4px 20px rgba(13,45,94,0.13);}
-.review-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px;}
-.review-meta{display:flex;flex-direction:column;gap:6px;}
-.review-location{font-size:1rem;font-weight:800;color:var(--navy);}
-.reviewer-badge{display:inline-block;font-size:0.72rem;font-weight:700;padding:4px 12px;border-radius:20px;}
-.badge-spouse{background:#E8F0FE;color:#2A56C6;}
-.badge-sm{background:#E6F4EA;color:#1E7E34;}
-.review-stars{color:var(--gold);font-size:1rem;text-align:right;}
-.review-text{font-size:0.95rem;color:#3A4A65;line-height:1.65;}
-.review-date{font-size:0.75rem;color:var(--slate);margin-top:10px;font-weight:500;}
-
-/* WIZARD MOCKUP */
-.wizard-container{background:var(--white);border-radius:18px;padding:40px;max-width:700px;margin:0 auto;box-shadow:0 4px 24px rgba(13,45,94,0.10);border:1px solid var(--light-steel);}
-.progress-bar{margin-bottom:32px;}
-.progress-track{background:var(--light-steel);height:6px;border-radius:3px;position:relative;overflow:hidden;}
-.progress-fill{background:var(--gold);height:100%;width:42%;transition:width 0.3s;}
-.progress-label{font-size:0.75rem;color:var(--slate);margin-top:8px;text-align:center;font-weight:600;}
-.wizard-step{}
-.step-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--slate);margin-bottom:12px;}
-.step-question{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:24px;line-height:1.4;}
-.radio-group{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
-.radio-pill{background:var(--white);border:1.5px solid var(--light-steel);color:var(--slate);padding:14px 20px;border-radius:50px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.2s;text-align:center;}
-.radio-pill:hover{background:var(--light-steel);}
-.radio-pill.selected{background:var(--navy);color:var(--white);border-color:var(--navy);}
-.wizard-nav{display:flex;justify-content:space-between;gap:12px;}
-.btn-secondary{background:var(--white);color:var(--navy);border:2px solid var(--navy);padding:13px 30px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
-.btn-secondary:hover{background:var(--light-steel);}
-.btn-primary{background:var(--navy);color:var(--white);border:none;padding:13px 32px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
-.btn-primary:hover{background:var(--soft-navy);}
-
-/* FOOTER */
-footer{background:var(--navy);color:rgba(255,255,255,0.75);text-align:center;padding:40px 24px;margin-top:80px;}
-.footer-brand{font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:10px;}
-.footer-brand .accent{color:var(--gold);}
-.footer-divider{width:60px;height:2px;background:var(--gold);margin:16px auto;border-radius:2px;}
-.footer-tagline{font-size:0.95rem;font-weight:500;color:rgba(255,255,255,0.62);margin-bottom:6px;}
-.footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.42);margin-top:12px;}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero h1{font-size:2.2rem;}
-  .nav-links{display:none;}
-  .cards-grid{grid-template-columns:1fr;}
-  .wizard-container{padding:28px 20px;}
-  .radio-group{gap:8px;}
-}
-</style>
-</head>
-<script>
-// PCS Scout - Interactive Functionality
-const wizardState = {
-  currentStep: 1,
-  totalSteps: 7,
-  answers: {},
-  stepData: [
-    {
-      step: 1,
-      category: 'Getting Started',
-      question: 'Which military installation are you reviewing?',
-      type: 'text',
-      placeholder: 'e.g., Fort Bragg, JBLM, Camp Pendleton'
-    },
-    {
-      step: 2,
-      category: 'School Quality',
-      question: 'What is the name of the school your child attended?',
-      type: 'text',
-      placeholder: 'School name'
-    },
-    {
-      step: 3,
-      category: 'Community & Belonging',
-      question: 'How quickly did your child feel socially adjusted at this school?',
-      type: 'radio',
-      options: [
-        'Within the first week',
-        'Within 2–4 weeks',
-        '1–3 months',
-        'More than 3 months',
-        'Has not yet adjusted'
-      ]
-    },
-    {
-      step: 4,
-      category: 'Academic Support',
-      question: 'How would you rate the school\'s support for military children?',
-      type: 'radio',
-      options: [
-        'Excellent - Very accommodating',
-        'Good - Generally supportive',
-        'Average - Standard support',
-        'Below Average - Limited support',
-        'Poor - Not supportive'
-      ]
-    },
-    {
-      step: 5,
-      category: 'Overall Rating',
-      question: 'What is your overall rating for this school?',
-      type: 'radio',
-      options: [
-        '⭐⭐⭐⭐⭐ 5 Stars - Exceptional',
-        '⭐⭐⭐⭐ 4 Stars - Very Good',
-        '⭐⭐⭐ 3 Stars - Good',
-        '⭐⭐ 2 Stars - Fair',
-        '⭐ 1 Star - Poor'
-      ]
-    },
-    {
-      step: 6,
-      category: 'Your Experience',
-      question: 'Please share your experience (optional)',
-      type: 'textarea',
-      placeholder: 'Tell other military families about your experience with this school...'
-    },
-    {
-      step: 7,
-      category: 'Contact Info',
-      question: 'Your information (to verify you\'re a military family member)',
-      type: 'form',
-      fields: [
-        { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
-        { name: 'email', label: 'Email', type: 'email', placeholder: 'your.email@example.com' },
-        { name: 'role', label: 'Your Role', type: 'select', options: ['Military Spouse', 'Active Duty Service Member', 'Veteran'] }
-      ]
+    :root{
+      --navy:#0D2D5E;
+      --soft-navy:#1A4A8A;
+      --gold:#E8B84B;
+      --pale-gold:#F5D98B;
+      --white:#FFFFFF;
+      --warm-sand:#FAF6EF;
+      --slate:#4A5D7A;
+      --light-steel:#E8EDF5;
+      --success:#2E7D52;
+      --success-light:#E6F4ED;
+      --info-blue:#1D4ED8;
+      --info-light:#EFF6FF;
     }
-  ]
-};
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-  initFilterButtons();
-  initWizard();
-  initSearchBar();
-  initCardClicks();
-  loadFromLocalStorage();
-});
+    /* NAV */
+    nav{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(13,45,94,0.18);}
+    .nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .logo-badge{background:var(--gold);color:var(--navy);font-weight:800;font-size:1rem;padding:8px 12px;border-radius:8px;letter-spacing:0.5px;}
+    .brand-name{color:var(--white);font-size:1.3rem;font-weight:800;letter-spacing:0.3px;}
+    .nav-links{display:flex;gap:24px;}
+    .nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.9rem;font-weight:600;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--gold);}
 
-// FILTER FUNCTIONALITY
-function initFilterButtons() {
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const reviewCards = document.querySelectorAll('.review-card');
-  
-  filterButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
-      
-      const filter = this.textContent.trim();
-      
-      reviewCards.forEach(card => {
-        const badge = card.querySelector('.reviewer-badge');
-        if (!badge) return;
-        
-        const badgeText = badge.textContent.trim();
-        
-        if (filter === 'All') {
-          card.style.display = 'block';
-        } else if (filter === 'Spouse Reviews' && badgeText === 'Spouse') {
-          card.style.display = 'block';
-        } else if (filter === 'Service Member' && badgeText === 'Service Member') {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+    /* HERO */
+    .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--soft-navy) 100%);padding:72px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:rgba(232,184,75,0.08);border-radius:50%;}
+    .hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:320px;height:320px;background:rgba(255,255,255,0.04);border-radius:50%;}
+    .hero-content{position:relative;z-index:2;max-width:700px;margin:0 auto;}
+    .hero-badge{display:inline-block;background:rgba(232,184,75,0.18);border:1px solid rgba(232,184,75,0.35);color:var(--pale-gold);font-size:0.72rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:6px 16px;border-radius:24px;margin-bottom:20px;}
+    .hero h1{font-size:3rem;font-weight:800;color:var(--white);margin-bottom:14px;line-height:1.15;}
+    .hero h1 .accent{color:var(--gold);}
+    .hero-tagline{color:rgba(255,255,255,0.80);font-size:1.1rem;margin-bottom:36px;font-weight:500;line-height:1.6;}
+    .search-bar{display:flex;max-width:560px;margin:0 auto;background:var(--white);border-radius:50px;padding:6px 6px 6px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.20);align-items:center;}
+    .search-bar input{flex:1;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:1rem;color:var(--navy);background:transparent;font-weight:400;}
+    .search-bar input::placeholder{color:var(--slate);}
+    .search-bar button{background:var(--gold);color:var(--navy);border:none;border-radius:50px;padding:13px 32px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .search-bar button:hover{background:var(--pale-gold);}
+
+    /* FILTER BAR */
+    .filter-bar{background:var(--white);border-bottom:1px solid var(--light-steel);padding:16px 24px;}
+    .filter-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+    .filter-label{font-size:0.8rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:1.2px;}
+    .filter-group{display:flex;gap:10px;flex-wrap:wrap;}
+    .filter-btn{background:var(--warm-sand);border:1.5px solid var(--light-steel);color:var(--navy);font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:600;padding:8px 18px;border-radius:50px;cursor:pointer;transition:all 0.2s;}
+    .filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
+    .filter-btn:hover:not(.active){background:var(--light-steel);}
+
+    /* SECTIONS */
+    .section{padding:56px 24px;max-width:1100px;margin:0 auto;}
+    .section-header{margin-bottom:36px;}
+    .gold-bar{width:48px;height:4px;background:var(--gold);border-radius:4px;margin-bottom:10px;}
+    .section-title{font-size:1.75rem;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.15;}
+    .section-subtitle{font-size:0.95rem;color:var(--slate);font-weight:500;}
+
+    /* LOCATION CARDS */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
+    .card{background:var(--white);border-radius:16px;box-shadow:0 2px 16px rgba(13,45,94,0.08);border:1px solid var(--light-steel);overflow:hidden;transition:all 0.3s;}
+    .card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(13,45,94,0.16);}
+    .card-header{background:linear-gradient(135deg,var(--navy),var(--soft-navy));padding:20px 22px 18px;}
+    .card-location{font-size:1.25rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+    .card-state{font-size:0.82rem;color:rgba(255,255,255,0.68);font-weight:600;}
+    .card-body{padding:20px 22px 22px;}
+    .school-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--slate);margin-bottom:6px;}
+    .school-name{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px;}
+    .stars-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+    .stars{color:var(--gold);font-size:1.05rem;letter-spacing:2px;}
+    .star-num{font-size:0.85rem;font-weight:700;color:var(--slate);}
+    .review-snippet{font-size:0.9rem;color:var(--slate);line-height:1.6;font-style:italic;border-left:3px solid var(--gold);padding-left:12px;margin-bottom:12px;}
+    .card-tag{display:inline-block;background:var(--pale-gold);color:#7A5C10;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:20px;}
+
+    /* REVIEW CARDS */
+    .reviews-feed{display:flex;flex-direction:column;gap:18px;}
+    .review-card{background:var(--white);border-radius:14px;padding:22px 24px;box-shadow:0 2px 10px rgba(13,45,94,0.07);border:1px solid var(--light-steel);transition:box-shadow 0.2s;}
+    .review-card:hover{box-shadow:0 4px 20px rgba(13,45,94,0.13);}
+    .review-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px;}
+    .review-meta{display:flex;flex-direction:column;gap:6px;}
+    .review-location{font-size:1rem;font-weight:800;color:var(--navy);}
+    .reviewer-badge{display:inline-block;font-size:0.72rem;font-weight:700;padding:4px 12px;border-radius:20px;}
+    .badge-spouse{background:#E8F0FE;color:#2A56C6;}
+    .badge-sm{background:#E6F4EA;color:#1E7E34;}
+    .review-stars{color:var(--gold);font-size:1rem;text-align:right;}
+    .review-text{font-size:0.95rem;color:#3A4A65;line-height:1.65;}
+    .review-date{font-size:0.75rem;color:var(--slate);margin-top:10px;font-weight:500;}
+
+    /* WIZARD */
+    .wizard-container{background:var(--white);border-radius:18px;padding:40px;max-width:700px;margin:0 auto;box-shadow:0 4px 24px rgba(13,45,94,0.10);border:1px solid var(--light-steel);}
+    .progress-bar{margin-bottom:32px;}
+    .progress-track{background:var(--light-steel);height:6px;border-radius:3px;position:relative;overflow:hidden;}
+    .progress-fill{background:var(--gold);height:100%;width:14%;transition:width 0.3s;}
+    .progress-label{font-size:0.75rem;color:var(--slate);margin-top:8px;text-align:center;font-weight:600;}
+    .step-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--slate);margin-bottom:12px;}
+    .step-question{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:24px;line-height:1.4;}
+    .radio-group{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+    .radio-pill{background:var(--white);border:1.5px solid var(--light-steel);color:var(--slate);padding:14px 20px;border-radius:50px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.2s;text-align:center;}
+    .radio-pill:hover{background:var(--light-steel);}
+    .radio-pill.selected{background:var(--navy);color:var(--white);border-color:var(--navy);}
+    .wizard-nav{display:flex;justify-content:space-between;gap:12px;}
+    .btn-secondary{background:var(--white);color:var(--navy);border:2px solid var(--navy);padding:13px 30px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
+    .btn-secondary:hover{background:var(--light-steel);}
+    .btn-primary{background:var(--navy);color:var(--white);border:none;padding:13px 32px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
+    .btn-primary:hover{background:var(--soft-navy);}
+
+    /* FOOTER */
+    footer{background:var(--navy);color:rgba(255,255,255,0.75);text-align:center;padding:40px 24px;margin-top:80px;}
+    .footer-brand{font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:10px;}
+    .footer-brand .accent{color:var(--gold);}
+    .footer-divider{width:60px;height:2px;background:var(--gold);margin:16px auto;border-radius:2px;}
+    .footer-tagline{font-size:0.95rem;font-weight:500;color:rgba(255,255,255,0.62);margin-bottom:6px;}
+    .footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.42);margin-top:12px;}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .hero h1{font-size:2.2rem;}
+      .nav-links{display:none;}
+      .cards-grid{grid-template-columns:1fr;}
+      .wizard-container{padding:28px 20px;}
+      .radio-group{gap:8px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="#">
+      <span class="logo-badge">PCS</span>
+      <span class="brand-name">PCS Scout</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Browse Locations</a>
+      <a href="#">Reviews</a>
+      <a href="#">Write a Review</a>
+      <a href="#">About</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">&#127894; Built for Military Families</div>
+      <h1>Find the best schools near your <span class="accent">next duty station</span></h1>
+      <p class="hero-tagline">Real reviews from military spouses and service members &mdash; helping you make confident PCS decisions for your kids.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Search by installation or ZIP code...">
+        <button type="button">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DUTY STATIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="gold-bar"></div>
+      <h2 class="section-title">Top Rated Duty Stations</h2>
+      <p class="section-subtitle">Based on school quality and community reviews from military families</p>
+    </div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-location">Fort Bragg</div>
+          <div class="card-state">North Carolina</div>
+        </div>
+        <div class="card-body">
+          <div class="school-label">Top Reviewed School</div>
+          <div class="school-name">Albritton Middle School</div>
+          <div class="stars-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="star-num">4.8 (124 reviews)</span>
+          </div>
+          <p class="review-snippet">"Incredible support system for military kids. The counselors genuinely understand frequent moves."</p>
+          <span class="card-tag">Military-Friendly</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-location">JBLM</div>
+          <div class="card-state">Washington</div>
+        </div>
+        <div class="card-body">
+          <div class="school-label">Top Reviewed School</div>
+          <div class="school-name">Custer Elementary School</div>
+          <div class="stars-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="star-num">4.6 (98 reviews)</span>
+          </div>
+          <p class="review-snippet">"Teachers went above and beyond helping our son catch up after our last PCS."</p>
+          <span class="card-tag">Academic Support</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-location">Camp Pendleton</div>
+          <div class="card-state">California</div>
+        </div>
+        <div class="card-body">
+          <div class="school-label">Top Reviewed School</div>
+          <div class="school-name">Del Rey Elementary</div>
+          <div class="stars-row">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            <span class="star-num">4.3 (76 reviews)</span>
+          </div>
+          <p class="review-snippet">"Great community feel. Our daughter made friends quickly and the principal is amazing."</p>
+          <span class="card-tag">Strong Community</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <span class="filter-label">Filter Reviews:</span>
+      <div class="filter-group">
+        <button class="filter-btn active" type="button">All</button>
+        <button class="filter-btn" type="button">Spouse Reviews</button>
+        <button class="filter-btn" type="button">Service Member</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECENT REVIEWS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="gold-bar"></div>
+      <h2 class="section-title">Recent Reviews</h2>
+      <p class="section-subtitle">Honest feedback from military families across the country</p>
+    </div>
+    <div class="reviews-feed">
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="review-meta">
+            <div class="review-location">Fort Bragg &mdash; Albritton Middle School</div>
+            <span class="reviewer-badge badge-spouse">Spouse</span>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <p class="review-text">This school was a lifesaver during our third PCS in five years. The staff understood exactly what our kids were going through. The counselor reached out within the first week to check in &mdash; that meant everything to us.</p>
+        <div class="review-date">Posted February 2026</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="review-meta">
+            <div class="review-location">JBLM &mdash; Custer Elementary</div>
+            <span class="reviewer-badge badge-sm">Service Member</span>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+        <p class="review-text">Solid school overall. The academic program is strong and the teachers are great. The commute from on-post housing can be rough during peak hours, but I would still recommend this school to any family PCS-ing here.</p>
+        <div class="review-date">Posted January 2026</div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-top">
+          <div class="review-meta">
+            <div class="review-location">Camp Pendleton &mdash; Del Rey Elementary</div>
+            <span class="reviewer-badge badge-spouse">Spouse</span>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+        <p class="review-text">We were so nervous about this move but Del Rey made the transition so smooth. The principal personally greeted our kids on their first day. There is a real sense of community here that you don't always find near bases.</p>
+        <div class="review-date">Posted January 2026</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WRITE A REVIEW WIZARD -->
+  <div class="section">
+    <div class="section-header">
+      <div class="gold-bar"></div>
+      <h2 class="section-title">Write a Review</h2>
+      <p class="section-subtitle">Share your experience to help the next military family</p>
+    </div>
+    <div class="wizard-container">
+      <div class="progress-bar">
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="progress-label">Step 1 of 7 &mdash; Getting Started</div>
+      </div>
+      <div class="wizard-step">
+        <div class="step-label">GETTING STARTED</div>
+        <div class="step-question">Which military installation are you reviewing?</div>
+        <div class="radio-group">
+          <input type="text" placeholder="e.g., Fort Bragg, JBLM, Camp Pendleton"
+            style="width:100%; padding:14px 20px; border-radius:50px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem; outline:none;">
+        </div>
+        <div class="wizard-nav">
+          <button class="btn-secondary" type="button">&larr; Back</button>
+          <button class="btn-primary" type="button">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">PCS <span class="accent">Scout</span></div>
+    <div class="footer-divider"></div>
+    <p class="footer-tagline">Helping military families navigate every move, one school at a time.</p>
+    <p class="footer-tagline">Built with &#10084;&#65039; by a military family, for military families.</p>
+    <p class="footer-copy">&copy; 2026 PCS Scout. All rights reserved. Not affiliated with the Department of Defense.</p>
+  </footer>
+
+  <!-- FIX 1: Script moved to end of <body> (was incorrectly placed before <body>) -->
+  <script>
+    // PCS Scout - Interactive Functionality
+
+    const wizardState = {
+      currentStep: 1,
+      totalSteps: 7,
+      answers: {},
+      stepData: [
+        {
+          step: 1,
+          category: 'Getting Started',
+          question: 'Which military installation are you reviewing?',
+          type: 'text',
+          placeholder: 'e.g., Fort Bragg, JBLM, Camp Pendleton'
+        },
+        {
+          step: 2,
+          category: 'School Quality',
+          question: 'What is the name of the school your child attended?',
+          type: 'text',
+          placeholder: 'School name'
+        },
+        {
+          step: 3,
+          category: 'Community & Belonging',
+          question: 'How quickly did your child feel socially adjusted at this school?',
+          type: 'radio',
+          options: [
+            'Within the first week',
+            'Within 2–4 weeks',
+            '1–3 months',
+            'More than 3 months',
+            'Has not yet adjusted'
+          ]
+        },
+        {
+          step: 4,
+          category: 'Academic Support',
+          question: 'How would you rate the school\'s support for military children?',
+          type: 'radio',
+          options: [
+            'Excellent - Very accommodating',
+            'Good - Generally supportive',
+            'Average - Standard support',
+            'Below Average - Limited support',
+            'Poor - Not supportive'
+          ]
+        },
+        {
+          step: 5,
+          category: 'Overall Rating',
+          question: 'What is your overall rating for this school?',
+          type: 'radio',
+          options: [
+            '⭐⭐⭐⭐⭐ 5 Stars - Exceptional',
+            '⭐⭐⭐⭐ 4 Stars - Very Good',
+            '⭐⭐⭐ 3 Stars - Good',
+            '⭐⭐ 2 Stars - Fair',
+            '⭐ 1 Star - Poor'
+          ]
+        },
+        {
+          step: 6,
+          category: 'Your Experience',
+          question: 'Please share your experience (optional)',
+          type: 'textarea',
+          placeholder: 'Tell other military families about your experience with this school...'
+        },
+        {
+          step: 7,
+          category: 'Contact Info',
+          question: 'Your information (to verify you\'re a military family member)',
+          type: 'form',
+          fields: [
+            { name: 'name',  label: 'Name',      type: 'text',   placeholder: 'Your name' },
+            { name: 'email', label: 'Email',     type: 'email',  placeholder: 'your.email@example.com' },
+            { name: 'role',  label: 'Your Role', type: 'select', options: ['Military Spouse', 'Active Duty Service Member', 'Veteran'] }
+          ]
         }
+      ]
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initFilterButtons();
+      initWizard();
+      initSearchBar();
+      initCardClicks();
+      loadFromLocalStorage();
+    });
+
+    // FILTER FUNCTIONALITY
+    function initFilterButtons() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const reviewCards   = document.querySelectorAll('.review-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+
+          const filter = this.textContent.trim();
+          reviewCards.forEach(card => {
+            const badge = card.querySelector('.reviewer-badge');
+            if (!badge) return;
+            const badgeText = badge.textContent.trim();
+
+            if (filter === 'All') {
+              card.style.display = 'block';
+            } else if (filter === 'Spouse Reviews' && badgeText === 'Spouse') {
+              card.style.display = 'block';
+            } else if (filter === 'Service Member' && badgeText === 'Service Member') {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
       });
-    });
-  });
-}
+    }
 
-// SEARCH FUNCTIONALITY
-function initSearchBar() {
-  const searchInput = document.querySelector('.search-bar input');
-  const searchButton = document.querySelector('.search-bar button');
-  
-  if (searchButton && searchInput) {
-    searchButton.addEventListener('click', performSearch);
-    searchInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        performSearch();
+    // SEARCH FUNCTIONALITY
+    function initSearchBar() {
+      const searchInput  = document.querySelector('.search-bar input');
+      const searchButton = document.querySelector('.search-bar button');
+
+      if (searchButton && searchInput) {
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') performSearch();
+        });
       }
-    });
-  }
-}
+    }
 
-function performSearch() {
-  const searchInput = document.querySelector('.search-bar input');
-  const searchTerm = searchInput.value.trim().toLowerCase();
-  
-  if (!searchTerm) {
-    alert('Please enter an installation or ZIP code to search.');
-    return;
-  }
-  
-  alert(`Searching for: "${searchTerm}"\n\nIn a live version, this would show results for military installations matching your search.`);
-  
-  const dutyStationsSection = document.querySelector('.section');
-  if (dutyStationsSection) {
-    dutyStationsSection.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-// WIZARD FUNCTIONALITY
-function initWizard() {
-  const backButton = document.querySelector('.wizard-nav .btn-secondary');
-  const nextButton = document.querySelector('.wizard-nav button:not(.btn-secondary)');
-  const radioPills = document.querySelectorAll('.radio-pill');
-  
-  radioPills.forEach(pill => {
-    pill.addEventListener('click', function() {
-      this.parentElement.querySelectorAll('.radio-pill').forEach(p => {
-        p.classList.remove('selected');
-      });
-      this.classList.add('selected');
-      wizardState.answers[`step${wizardState.currentStep}`] = this.textContent.trim();
-      saveToLocalStorage();
-    });
-  });
-  
-  if (backButton) {
-    backButton.addEventListener('click', function() {
-      if (wizardState.currentStep > 1) {
-        wizardState.currentStep--;
-        updateWizardDisplay();
-      }
-    });
-  }
-  
-  if (nextButton) {
-    nextButton.addEventListener('click', function() {
-      const selectedAnswer = document.querySelector('.radio-pill.selected');
-      
-      if (!selectedAnswer && wizardState.currentStep === 3) {
-        alert('Please select an answer before continuing.');
+    function performSearch() {
+      const searchInput = document.querySelector('.search-bar input');
+      const searchTerm  = searchInput.value.trim().toLowerCase();
+      if (!searchTerm) {
+        alert('Please enter an installation or ZIP code to search.');
         return;
       }
-      
-      if (wizardState.currentStep < wizardState.totalSteps) {
-        wizardState.currentStep++;
-        updateWizardDisplay();
-      } else {
-        submitWizard();
-      }
-    });
-  }
-}
-
-function updateWizardDisplay() {
-  const step = wizardState.stepData[wizardState.currentStep - 1];
-  
-  const progressFill = document.querySelector('.progress-fill');
-  const progressLabel = document.querySelector('.progress-label');
-  const progress = (wizardState.currentStep / wizardState.totalSteps) * 100;
-  
-  if (progressFill) {
-    progressFill.style.width = `${progress}%`;
-  }
-  
-  if (progressLabel) {
-    progressLabel.textContent = `Step ${wizardState.currentStep} of ${wizardState.totalSteps} — ${step.category}`;
-  }
-  
-  const stepLabel = document.querySelector('.step-label');
-  const stepQuestion = document.querySelector('.step-question');
-  
-  if (stepLabel) {
-    stepLabel.textContent = step.category.toUpperCase();
-  }
-  
-  if (stepQuestion) {
-    stepQuestion.textContent = step.question;
-  }
-  
-  const radioGroup = document.querySelector('.radio-group');
-  
-  if (radioGroup && step.type === 'radio') {
-    radioGroup.innerHTML = '';
-    step.options.forEach(option => {
-      const pill = document.createElement('div');
-      pill.className = 'radio-pill';
-      pill.textContent = option;
-      
-      if (wizardState.answers[`step${wizardState.currentStep}`] === option) {
-        pill.classList.add('selected');
-      }
-      
-      pill.addEventListener('click', function() {
-        radioGroup.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('selected'));
-        this.classList.add('selected');
-        wizardState.answers[`step${wizardState.currentStep}`] = option;
-        saveToLocalStorage();
-      });
-      
-      radioGroup.appendChild(pill);
-    });
-  } else if (radioGroup && step.type === 'text') {
-    radioGroup.innerHTML = `<input type="text" placeholder="${step.placeholder}" style="width:100%; padding:14px 20px; border-radius:50px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem;">`;
-  } else if (radioGroup && step.type === 'textarea') {
-    radioGroup.innerHTML = `<textarea placeholder="${step.placeholder}" rows="6" style="width:100%; padding:16px 20px; border-radius:16px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem; resize:vertical;"></textarea>`;
-  } else if (radioGroup && step.type === 'form') {
-    let formHTML = '';
-    step.fields.forEach(field => {
-      formHTML += `<div style="margin-bottom:16px;">`;
-      formHTML += `abel style="display:block; font-size:0.85rem; font-weight:700; color:var(--slate); margin-bottom:6px;">${field.label}</label>`;
-      
-      if (field.type === 'select') {
-        formHTML += `<select style="width:100%; padding:12px 16px; border-radius:50px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem;">`;
-        field.options.forEach(opt => {
-          formHTML += `<option>${opt}</option>`;
-        });
-        formHTML += `</select>`;
-      } else {
-        formHTML += `<input type="${field.type}" placeholder="${field.placeholder}" style="width:100%; padding:12px 20px; border-radius:50px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem;">`;
-      }
-      
-      formHTML += `</div>`;
-    });
-    radioGroup.innerHTML = formHTML;
-  }
-  
-  const nextButton = document.querySelector('.wizard-nav button:not(.btn-secondary)');
-  if (nextButton) {
-    if (wizardState.currentStep === wizardState.totalSteps) {
-      nextButton.textContent = 'Submit Review →';
-    } else {
-      nextButton.textContent = 'Next →';
+      alert(`Searching for: "${searchTerm}"\n\nIn a live version, this would show results for military installations matching your search.`);
+      const dutySection = document.querySelector('.section');
+      if (dutySection) dutySection.scrollIntoView({ behavior: 'smooth' });
     }
-  }
-  
-  saveToLocalStorage();
-}
 
-function submitWizard() {
-  alert('Thank you for your review! Your feedback helps other military families make informed decisions about their next PCS.\n\nIn a live version, this would be saved to our database.');
-  
-  wizardState.currentStep = 1;
-  wizardState.answers = {};
-  updateWizardDisplay();
-  localStorage.removeItem('pcsScoutWizard');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+    // WIZARD FUNCTIONALITY
+    // FIX 4: Removed redundant radio-pill listener binding from initWizard().
+    //         Listeners are correctly managed inside updateWizardDisplay().
+    function initWizard() {
+      const backButton = document.querySelector('.wizard-nav .btn-secondary');
+      const nextButton = document.querySelector('.wizard-nav .btn-primary');
 
-// CARD INTERACTIONS
-function initCardClicks() {
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card => {
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', function() {
-      const location = this.querySelector('.card-location')?.textContent;
-      alert(`In a live version, clicking would show detailed information about ${location}`);
-    });
-  });
-}
+      if (backButton) {
+        backButton.addEventListener('click', function () {
+          if (wizardState.currentStep > 1) {
+            wizardState.currentStep--;
+            updateWizardDisplay();
+          }
+        });
+      }
 
-// LOCAL STORAGE
-function saveToLocalStorage() {
-  localStorage.setItem('pcsScoutWizard', JSON.stringify(wizardState));
-}
+      if (nextButton) {
+        nextButton.addEventListener('click', function () {
+          // FIX 3: Validate all radio steps (3, 4, 5), not just step 3
+          const radioSteps     = [3, 4, 5];
+          const selectedAnswer = document.querySelector('.radio-pill.selected');
+          if (!selectedAnswer && radioSteps.includes(wizardState.currentStep)) {
+            alert('Please select an answer before continuing.');
+            return;
+          }
+          if (wizardState.currentStep < wizardState.totalSteps) {
+            wizardState.currentStep++;
+            updateWizardDisplay();
+          } else {
+            submitWizard();
+          }
+        });
+      }
+    }
 
-function loadFromLocalStorage() {
-  const saved = localStorage.getItem('pcsScoutWizard');
-  if (saved) {
-    const savedState = JSON.parse(saved);
-    wizardState.currentStep = savedState.currentStep || 1;
-    wizardState.answers = savedState.answers || {};
-    updateWizardDisplay();
-  }
-}
+    function updateWizardDisplay() {
+      const step = wizardState.stepData[wizardState.currentStep - 1];
+      const progressFill  = document.querySelector('.progress-fill');
+      const progressLabel = document.querySelector('.progress-label');
+      const progress      = (wizardState.currentStep / wizardState.totalSteps) * 100;
 
-console.log('✅ PCS Scout interactive features loaded successfully!');
-console.log('Features: Filter reviews, multi-step wizard, search, local storage');
-</script>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PCS Scout - Design Mockup</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Nunito',sans-serif;background:#FAF6EF;color:#0D2D5E;line-height:1.65;}
+      if (progressFill)  progressFill.style.width    = `${progress}%`;
+      if (progressLabel) progressLabel.textContent    = `Step ${wizardState.currentStep} of ${wizardState.totalSteps} — ${step.category}`;
 
-/* DESIGN TOKENS */
-:root{
-  --navy:#0D2D5E;
-  --soft-navy:#1A4A8A;
-  --gold:#E8B84B;
-  --pale-gold:#F5D98B;
-  --white:#FFFFFF;
-  --warm-sand:#FAF6EF;
-  --slate:#4A5D7A;
-  --light-steel:#E8EDF5;
-  --success:#2E7D52;
-  --success-light:#E6F4ED;
-  --info-blue:#1D4ED8;
-  --info-light:#EFF6FF;
-}
+      const stepLabel    = document.querySelector('.step-label');
+      const stepQuestion = document.querySelector('.step-question');
+      if (stepLabel)    stepLabel.textContent    = step.category.toUpperCase();
+      if (stepQuestion) stepQuestion.textContent = step.question;
 
-/* NAV */
-nav{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(13,45,94,0.18);}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.logo-badge{background:var(--gold);color:var(--navy);font-weight:800;font-size:1rem;padding:8px 12px;border-radius:8px;letter-spacing:0.5px;}
-.brand-name{color:var(--white);font-size:1.3rem;font-weight:800;letter-spacing:0.3px;}
-.nav-links{display:flex;gap:24px;}
-.nav-links a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.9rem;font-weight:600;transition:color 0.2s;}
-.nav-links a:hover{color:var(--gold);}
+      const radioGroup = document.querySelector('.radio-group');
 
-/* HERO */
-.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--soft-navy) 100%);padding:72px 24px 80px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:rgba(232,184,75,0.08);border-radius:50%;}
-.hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:320px;height:320px;background:rgba(255,255,255,0.04);border-radius:50%;}
-.hero-content{position:relative;z-index:2;max-width:700px;margin:0 auto;}
-.hero-badge{display:inline-block;background:rgba(232,184,75,0.18);border:1px solid rgba(232,184,75,0.35);color:var(--pale-gold);font-size:0.72rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:6px 16px;border-radius:24px;margin-bottom:20px;}
-.hero h1{font-size:3rem;font-weight:800;color:var(--white);margin-bottom:14px;line-height:1.15;}
-.hero h1 .accent{color:var(--gold);}
-.hero-tagline{color:rgba(255,255,255,0.80);font-size:1.1rem;margin-bottom:36px;font-weight:500;line-height:1.6;}
-.search-bar{display:flex;max-width:560px;margin:0 auto;background:var(--white);border-radius:50px;padding:6px 6px 6px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.20);align-items:center;}
-.search-bar input{flex:1;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:1rem;color:var(--navy);background:transparent;font-weight:400;}
-.search-bar input::placeholder{color:var(--slate);}
-.search-bar button{background:var(--gold);color:var(--navy);border:none;border-radius:50px;padding:13px 32px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-.search-bar button:hover{background:var(--pale-gold);}
+      if (radioGroup && step.type === 'radio') {
+        radioGroup.innerHTML = '';
+        step.options.forEach(option => {
+          const pill = document.createElement('div');
+          pill.className   = 'radio-pill';
+          pill.textContent = option;
+          if (wizardState.answers[`step${wizardState.currentStep}`] === option) {
+            pill.classList.add('selected');
+          }
+          pill.addEventListener('click', function () {
+            radioGroup.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('selected'));
+            this.classList.add('selected');
+            wizardState.answers[`step${wizardState.currentStep}`] = option;
+            saveToLocalStorage();
+          });
+          radioGroup.appendChild(pill);
+        });
 
-/* FILTER BAR */
-.filter-bar{background:var(--white);border-bottom:1px solid var(--light-steel);padding:16px 24px;}
-.filter-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
-.filter-label{font-size:0.8rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:1.2px;}
-.filter-group{display:flex;gap:10px;flex-wrap:wrap;}
-.filter-btn{background:var(--warm-sand);border:1.5px solid var(--light-steel);color:var(--navy);font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:600;padding:8px 18px;border-radius:50px;cursor:pointer;transition:all 0.2s;}
-.filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
-.filter-btn:hover:not(.active){background:var(--light-steel);}
+      } else if (radioGroup && step.type === 'text') {
+        radioGroup.innerHTML = `<input type="text" placeholder="${step.placeholder}" style="width:100%; padding:14px 20px; border-radius:50px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem; outline:none;">`;
 
-/* SECTIONS */
-.section{padding:56px 24px;max-width:1100px;margin:0 auto;}
-.section-header{margin-bottom:36px;}
-.gold-bar{width:48px;height:4px;background:var(--gold);border-radius:4px;margin-bottom:10px;}
-.section-title{font-size:1.75rem;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.15;}
-.section-subtitle{font-size:0.95rem;color:var(--slate);font-weight:500;}
+      } else if (radioGroup && step.type === 'textarea') {
+        radioGroup.innerHTML = `<textarea placeholder="${step.placeholder}" rows="6" style="width:100%; padding:16px 20px; border-radius:16px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem; resize:vertical; outline:none;"></textarea>`;
 
-/* LOCATION CARDS */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
-.card{background:var(--white);border-radius:16px;box-shadow:0 2px 16px rgba(13,45,94,0.08);border:1px solid var(--light-steel);overflow:hidden;transition:all 0.3s;}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(13,45,94,0.16);}
-.card-header{background:linear-gradient(135deg,var(--navy),var(--soft-navy));padding:20px 22px 18px;}
-.card-location{font-size:1.25rem;font-weight:700;color:var(--white);margin-bottom:4px;}
-.card-state{font-size:0.82rem;color:rgba(255,255,255,0.68);font-weight:600;}
-.card-body{padding:20px 22px 22px;}
-.school-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--slate);margin-bottom:6px;}
-.school-name{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:12px;}
-.stars-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
-.stars{color:var(--gold);font-size:1.05rem;letter-spacing:2px;}
-.star-num{font-size:0.85rem;font-weight:700;color:var(--slate);}
-.review-snippet{font-size:0.9rem;color:var(--slate);line-height:1.6;font-style:italic;border-left:3px solid var(--gold);padding-left:12px;margin-bottom:12px;}
-.card-tag{display:inline-block;background:var(--pale-gold);color:#7A5C10;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:20px;}
+      } else if (radioGroup && step.type === 'form') {
+        let formHTML = '';
+        step.fields.forEach(field => {
+          formHTML += `<div style="margin-bottom:16px;">`;
+          // FIX 2: Restored full <label> tag (was truncated to "abel")
+          formHTML += `<label style="display:block; font-size:0.85rem; font-weight:700; color:var(--slate); margin-bottom:6px;">${field.label}</label>`;
+          if (field.type === 'select') {
+            formHTML += `<select style="width:100%; padding:12px 16px; border-radius:50px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem; outline:none;">`;
+            field.options.forEach(opt => { formHTML += `<option>${opt}</option>`; });
+            formHTML += `</select>`;
+          } else {
+            formHTML += `<input type="${field.type}" placeholder="${field.placeholder}" style="width:100%; padding:12px 20px; border-radius:50px; border:1.5px solid var(--light-steel); font-family:'Nunito',sans-serif; font-size:0.9rem; outline:none;">`;
+          }
+          formHTML += `</div>`;
+        });
+        radioGroup.innerHTML = formHTML;
+      }
 
-/* REVIEW CARDS */
-.reviews-feed{display:flex;flex-direction:column;gap:18px;}
-.review-card{background:var(--white);border-radius:14px;padding:22px 24px;box-shadow:0 2px 10px rgba(13,45,94,0.07);border:1px solid var(--light-steel);transition:box-shadow 0.2s;}
-.review-card:hover{box-shadow:0 4px 20px rgba(13,45,94,0.13);}
-.review-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px;}
-.review-meta{display:flex;flex-direction:column;gap:6px;}
-.review-location{font-size:1rem;font-weight:800;color:var(--navy);}
-.reviewer-badge{display:inline-block;font-size:0.72rem;font-weight:700;padding:4px 12px;border-radius:20px;}
-.badge-spouse{background:#E8F0FE;color:#2A56C6;}
-.badge-sm{background:#E6F4EA;color:#1E7E34;}
-.review-stars{color:var(--gold);font-size:1rem;text-align:right;}
-.review-text{font-size:0.95rem;color:#3A4A65;line-height:1.65;}
-.review-date{font-size:0.75rem;color:var(--slate);margin-top:10px;font-weight:500;}
+      const nextBtn = document.querySelector('.wizard-nav .btn-primary');
+      if (nextBtn) {
+        nextBtn.textContent = wizardState.currentStep === wizardState.totalSteps ? 'Submit Review →' : 'Next →';
+      }
 
-/* WIZARD MOCKUP */
-.wizard-container{background:var(--white);border-radius:18px;padding:40px;max-width:700px;margin:0 auto;box-shadow:0 4px 24px rgba(13,45,94,0.10);border:1px solid var(--light-steel);}
-.progress-bar{margin-bottom:32px;}
-.progress-track{background:var(--light-steel);height:6px;border-radius:3px;position:relative;overflow:hidden;}
-.progress-fill{background:var(--gold);height:100%;width:42%;transition:width 0.3s;}
-.progress-label{font-size:0.75rem;color:var(--slate);margin-top:8px;text-align:center;font-weight:600;}
-.wizard-step{}
-.step-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--slate);margin-bottom:12px;}
-.step-question{font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:24px;line-height:1.4;}
-.radio-group{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
-.radio-pill{background:var(--white);border:1.5px solid var(--light-steel);color:var(--slate);padding:14px 20px;border-radius:50px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:all 0.2s;text-align:center;}
-.radio-pill:hover{background:var(--light-steel);}
-.radio-pill.selected{background:var(--navy);color:var(--white);border-color:var(--navy);}
-.wizard-nav{display:flex;justify-content:space-between;gap:12px;}
-.btn-secondary{background:var(--white);color:var(--navy);border:2px solid var(--navy);padding:13px 30px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
-.btn-secondary:hover{background:var(--light-steel);}
-.btn-primary{background:var(--navy);color:var(--white);border:none;padding:13px 32px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;}
-.btn-primary:hover{background:var(--soft-navy);}
+      // FIX 5: Removed saveToLocalStorage() from here — only save on explicit user answer changes
+    }
 
-/* FOOTER */
-footer{background:var(--navy);color:rgba(255,255,255,0.75);text-align:center;padding:40px 24px;margin-top:80px;}
-.footer-brand{font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:10px;}
-.footer-brand .accent{color:var(--gold);}
-.footer-divider{width:60px;height:2px;background:var(--gold);margin:16px auto;border-radius:2px;}
-.footer-tagline{font-size:0.95rem;font-weight:500;color:rgba(255,255,255,0.62);margin-bottom:6px;}
-.footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.42);margin-top:12px;}
+    function submitWizard() {
+      alert('Thank you for your review! Your feedback helps other military families make informed decisions about their next PCS.\n\nIn a live version, this would be saved to our database.');
+      wizardState.currentStep = 1;
+      wizardState.answers     = {};
+      updateWizardDisplay();
+      localStorage.removeItem('pcsScoutWizard');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero h1{font-size:2.2rem;}
-  .nav-links{display:none;}
-  .cards-grid{grid-template-columns:1fr;}
-  .wizard-container{padding:28px 20px;}
-  .radio-group{gap:8px;}
-}
-</style>
-</head>
-<body>
-<body>
+    // CARD INTERACTIONS
+    function initCardClicks() {
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function () {
+          const location = this.querySelector('.card-location')?.textContent;
+          alert(`In a live version, clicking would show detailed information about ${location}`);
+        });
+      });
+    }
+
+    // LOCAL STORAGE
+    function saveToLocalStorage() {
+      localStorage.setItem('pcsScoutWizard', JSON.stringify(wizardState));
+    }
+
+    function loadFromLocalStorage() {
+      const saved = localStorage.getItem('pcsScoutWizard');
+      if (saved) {
+        const savedState = JSON.parse(saved);
+        wizardState.currentStep = savedState.currentStep || 1;
+        wizardState.answers     = savedState.answers     || {};
+        updateWizardDisplay();
+      }
+    }
+
+    console.log('✅ PCS Scout interactive features loaded successfully!');
+    console.log('Features: Filter reviews, multi-step wizard, search, local storage');
+  </script>
+
+</body>
+</html>
